@@ -1,0 +1,189 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Evitar animaciones si el usuario prefiere reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+/* Contenedor principal con 2 columnas */
+.container {
+  display: flex;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+/* -----------------------
+   COLUMNA IZQUIERDA
+   ----------------------- */
+.sidebar {
+  background: #222;
+  color: white;
+  width: 30%;
+  padding: 28px 24px;
+  animation: slideInLeft 1s ease;
+}
+
+.profile-pic {
+  width: 160px;
+  height: 160px;
+  margin: 0 auto 18px auto;
+  transition: transform 0.5s ease;
+}
+
+.profile-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #f07b3f;
+  animation: floatImg 6s ease-in-out infinite;
+}
+
+.profile-pic:hover {
+  transform: scale(1.1);
+}
+
+a {
+  color: #f07b3f;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.contacto p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.sidebar h2, .main-content h2 {
+  margin: 16px 0 10px 0;
+  font-size: 18px;
+  border-bottom: 2px solid #f07b3f;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+
+.sidebar ul {
+  margin-left: 14px;
+  list-style-type: disc;
+  color: #ddd;
+}
+
+/* -----------------------
+   COLUMNA DERECHA
+   ----------------------- */
+.main-content {
+  flex: 1;
+  padding: 40px 56px;
+  background: #f4f2ed;
+  position: relative;
+  overflow: hidden; /* para contener las figuras */
+  animation: fadeIn 1.2s ease;
+}
+
+/* Añadimos figuritas flotando con pseudo-elementos */
+.main-content::before,
+.main-content::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1; /* muy sutil */
+  animation: floatShapes 30s linear infinite;
+}
+
+/* Un círculo grande */
+.main-content::before {
+  width: 180px;
+  height: 180px;
+  top: 20%;
+  left: -80px;
+  background: #f07b3f;
+  animation-delay: 0s;
+}
+
+/* Un círculo más pequeño */
+.main-content::after {
+  width: 100px;
+  height: 100px;
+  bottom: 15%;
+  right: -50px;
+  background: #333;
+  animation-delay: 10s;
+}
+
+/* -----------------------
+   TIPOGRAFÍA
+   ----------------------- */
+.main-content h1 {
+  font-size: 36px;
+  margin-bottom: 6px;
+}
+
+.main-content h3 {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 22px;
+}
+
+.main-content h2 {
+  color: #f07b3f;
+  margin-top: 18px;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+h2 {
+  transition: transform 0.4s ease;
+}
+
+h2:hover {
+  cursor: pointer;
+  transform: scale(1.06);
+}
+
+.main-content ul {
+  margin-left: 20px;
+  list-style-type: circle;
+  margin-bottom: 16px;
+}
+
+/* -----------------------
+   ANIMACIONES
+   ----------------------- */
+@keyframes slideInLeft {
+  from { transform: translateX(-120%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatImg {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-8px); }
+  100% { transform: translateY(0); }
+}
+
+/* Animación de figuritas flotantes */
+@keyframes floatShapes {
+  0%   { transform: translateY(0) rotate(0deg); }
+  50%  { transform: translateY(-50px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
+}
+
+/* -----------------------
+   RESPONSIVE
+   ----------------------- */
+@media (max-width: 880px) {
+  .container { flex-direction: column; }
+  .sidebar { width: 100%; }
+  .main-content { padding: 28px; }
+}
